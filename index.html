@@ -3,378 +3,330 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ULTRA Ad-Blocker Stress Test - Memory Optimized</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <title>ULTIMATE ADS BOMBER</title>
+    <style>* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    text-align: center;
+    padding: 20px;
+    background: #111;
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+.main-container {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.header {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+}
+
+.title {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.5em;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+.copyright {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #999;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 10px;
+    z-index: 9998;
+    backdrop-filter: blur(4px);
+}
+
+.risk-warning {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #333;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.risk-warning::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    animation: shimmer 4s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.risk-title {
+    font-size: 1.8em;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #fff;
+}
+
+.risk-list {
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+}
+
+.risk-item {
+    margin: 10px 0;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+.risk-item:last-child {
+    border-bottom: none;
+}
+
+.consent-section {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 12px;
+    border: 1px solid #333;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.consent-button {
+    background: #fff;
+    color: #111;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px;
+    transition: all 0.3s ease;
+}
+
+.consent-button:hover {
+    background: #e0e0e0;
+    transform: translateY(-1px);
+}
+
+.consent-button.danger {
+    background: #e63946;
+    color: #fff;
+}
+
+.consent-button.danger:hover {
+    background: #d00000;
+}
+
+.stats {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 12px;
+    border: 1px solid #333;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    position: relative;
+    overflow: hidden;
+}
+
+.stats::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    animation: scan 5s infinite;
+}
+
+@keyframes scan {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.counter {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background: #fff;
+    color: #111;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    z-index: 9999;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 15px 0;
+    border: 1px solid #333;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #fff;
+    width: 0%;
+    transition: width 0.3s ease;
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: progressShine 2s infinite;
+}
+
+@keyframes progressShine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.status {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 12px 0;
+    color: #fff;
+}
+
+.warning {
+    background: rgba(230, 57, 70, 0.1);
+    border: 1px solid #e63946;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+}
+
+.memory-stats {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #333;
+    padding: 12px;
+    margin: 15px 0;
+    border-radius: 8px;
+    font-size: 13px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+}
+
+.section-indicator {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    font-size: 14px;
+    border-left: 4px solid #e63946;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    position: relative;
+    z-index: 1;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.float-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #fff;
+    border-radius: 50%;
+    animation: float 12s infinite linear;
+    opacity: 0.5;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) translateX(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.5;
+    }
+    90% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-100px) translateX(50px);
+        opacity: 0;
+    }
+}
         
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
-            padding: 20px;
-            background: linear-gradient(135deg, #0f0f23, #1a1a2e, #16213e, #0f0f23);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            color: white;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
         
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .main-container {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-        }
-        
-        .header {
-            margin-bottom: 30px;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 20px;
-            box-shadow: 0 0 50px rgba(255, 0, 100, 0.3);
-            backdrop-filter: blur(10px);
-        }
-        
-        .title {
-            font-size: 3.5em;
-            font-weight: 900;
-            background: linear-gradient(45deg, #ff0080, #ff8c00, #40e0d0, #ff0080);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradientShift 3s ease infinite;
-            text-shadow: 0 0 30px rgba(255, 0, 128, 0.5);
-            margin-bottom: 10px;
-        }
-        
-        .subtitle {
-            font-size: 1.8em;
-            color: #00ffff;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
-            margin-bottom: 20px;
-        }
-        
-        .copyright {
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-            background: rgba(0, 0, 0, 0.8);
-            color: #888;
-            padding: 8px 12px;
-            border-radius: 5px;
-            font-size: 11px;
-            z-index: 9998;
-            backdrop-filter: blur(5px);
-        }
-        
-        .risk-warning {
-            background: linear-gradient(135deg, #ff1744, #d50000);
-            border: 3px solid #ff5722;
-            padding: 25px;
-            margin: 30px 0;
-            border-radius: 15px;
-            box-shadow: 0 0 40px rgba(255, 23, 68, 0.6);
-            animation: criticalPulse 2s infinite;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .risk-warning::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            animation: shimmer 3s infinite;
-        }
-        
-        @keyframes criticalPulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 40px rgba(255, 23, 68, 0.6); }
-            50% { transform: scale(1.02); box-shadow: 0 0 60px rgba(255, 23, 68, 0.9); }
-        }
-        
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-        
-        .risk-title {
-            font-size: 2em;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-        }
-        
-        .risk-list {
-            text-align: left;
-            max-width: 600px;
-            margin: 0 auto;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 20px;
-            border-radius: 10px;
-            backdrop-filter: blur(5px);
-        }
-        
-        .risk-item {
-            margin: 12px 0;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            position: relative;
-            z-index: 1;
-        }
-        
-        .risk-item:last-child {
-            border-bottom: none;
-        }
-        
-        .consent-section {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 15px;
-            border: 2px solid #ffa500;
-            box-shadow: 0 0 30px rgba(255, 165, 0, 0.4);
-        }
-        
-        .consent-button {
-            background: linear-gradient(45deg, #ff6b35, #f7931e);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 10px;
-            cursor: pointer;
-            margin: 10px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
-        }
-        
-        .consent-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.6);
-        }
-        
-        .consent-button.danger {
-            background: linear-gradient(45deg, #dc2626, #b91c1c);
-            box-shadow: 0 5px 15px rgba(220, 38, 38, 0.4);
-        }
-        
-        .consent-button.danger:hover {
-            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.6);
-        }
-        
-        .stats {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 25px;
-            margin: 25px auto;
-            border-radius: 20px;
-            box-shadow: 0 0 50px rgba(0, 255, 255, 0.3);
-            border: 2px solid #00ffff;
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .stats::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
-            animation: scan 4s infinite;
-        }
-        
-        @keyframes scan {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-        
-        .counter {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            background: linear-gradient(45deg, #ff0080, #ff8c00);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 15px;
-            font-size: 16px;
-            font-weight: bold;
-            z-index: 9999;
-            box-shadow: 0 0 30px rgba(255, 0, 128, 0.7);
-            animation: counterPulse 1.5s infinite;
-            backdrop-filter: blur(10px);
-        }
-        
-        @keyframes counterPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        
-        .progress-bar {
-            width: 100%;
-            height: 30px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 15px;
-            overflow: hidden;
-            margin: 20px 0;
-            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.7);
-            border: 2px solid #333;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #ff0080, #ff8c00, #40e0d0, #ff0080);
-            background-size: 400% 100%;
-            width: 0%;
-            transition: width 0.2s ease;
-            animation: progressGlow 2s ease-in-out infinite;
-            position: relative;
-        }
-        
-        .progress-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: progressShine 1.5s infinite;
-        }
-        
-        @keyframes progressGlow {
-            0%, 100% { 
-                background-position: 0% 50%;
-                box-shadow: 0 0 20px rgba(255, 0, 128, 0.5);
-            }
-            50% { 
-                background-position: 100% 50%;
-                box-shadow: 0 0 40px rgba(255, 140, 0, 0.8);
-            }
-        }
-        
-        @keyframes progressShine {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-        
-        .status {
-            font-size: 20px;
-            font-weight: bold;
-            margin: 15px 0;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
-            color: #00ffff;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .warning {
-            background: linear-gradient(135deg, rgba(255, 68, 68, 0.3), rgba(255, 0, 102, 0.3));
-            border: 3px solid #ff4444;
-            padding: 20px;
-            margin: 25px 0;
-            border-radius: 15px;
-            animation: warningBlink 1.5s infinite;
-            box-shadow: 0 0 40px rgba(255, 68, 68, 0.4);
-            backdrop-filter: blur(5px);
-        }
-        
-        @keyframes warningBlink {
-            0%, 100% { opacity: 1; border-color: #ff4444; }
-            50% { opacity: 0.8; border-color: #ff0066; }
-        }
-        
-        .memory-stats {
-            background: linear-gradient(135deg, rgba(0, 255, 0, 0.2), rgba(0, 255, 255, 0.2));
-            border: 2px solid #00ff88;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 10px;
-            font-size: 14px;
-            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
-            backdrop-filter: blur(5px);
-        }
-        
-        .section-indicator {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 10px;
-            font-size: 16px;
-            border-left: 5px solid #ff4444;
-            box-shadow: 0 0 20px rgba(255, 68, 68, 0.2);
-            backdrop-filter: blur(5px);
-            position: relative;
-            z-index: 1;
-        }
-        
-        .hidden {
-            display: none !important;
-        }
-        
-        .float-particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #ff0080;
-            border-radius: 50%;
-            animation: float 10s infinite linear;
-            opacity: 0.7;
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) translateX(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.7;
-            }
-            90% {
-                opacity: 0.7;
-            }
-            100% {
-                transform: translateY(-100px) translateX(100px);
-                opacity: 0;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="float-particles" id="particles"></div>
-    <div class="copyright">© 2024 Royverse. All rights reserved.</div>
+    <div class="copyright">© <span id="copyright-year"></span> Royverse. All rights reserved.</div>
     <div class="counter" id="liveCounter">🔥 INITIALIZING BOMBARDMENT...</div>
     
     <div class="main-container">
         <div class="header">
-            <h1 class="title">🚫 ULTRA AD-BLOCKER STRESS TEST 🚫</h1>
-            <h2 class="subtitle">⚡ MEMORY OPTIMIZED EDITION ⚡</h2>
+            <h1 class="title">ULTIMATE ADS BOMBER</h1>
+            <h2 class="subtitle"></h2>
         </div>
         
         <div class="risk-warning" id="riskWarning">
@@ -424,8 +376,11 @@
         <div id="content-container"></div>
         <div id="current-section" class="section-indicator hidden">Ready to begin...</div>
     </div>
-
+<script>
+    document.getElementById('copyright-year').textContent = new Date().getFullYear();
+</script>
     <script>
+        
         let totalElements = 0;
         let activeElements = 0;
         let cleanedElements = 0;
