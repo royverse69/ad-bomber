@@ -3,175 +3,655 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Ad-Blocker Stress Test - 5000+ Trackers</title>
+    <title>ULTRA Ad-Blocker Stress Test - Memory Optimized</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
             padding: 20px;
-            background-color: #f0f0f0;
-        }
-        .ad-box {
-            border: 2px dashed #ff4444;
-            margin: 2px auto;
-            padding: 5px;
-            width: 280px;
-            background-color: #ffe6e6;
-            font-size: 10px;
-        }
-        .tracker {
-            display: none !important;
-            width: 1px !important;
-            height: 1px !important;
-            position: absolute !important;
-            top: -1000px !important;
-        }
-        iframe {
-            display: block;
-            margin: 2px auto;
-            border: 1px solid #ccc;
-        }
-        .stats {
-            background-color: #e6f3ff;
-            padding: 15px;
-            margin: 20px auto;
-            width: 500px;
-            border-radius: 5px;
-        }
-        .section-header {
-            background-color: #333;
+            background: linear-gradient(135deg, #0f0f23, #1a1a2e, #16213e, #0f0f23);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             color: white;
-            padding: 5px;
-            margin: 10px 0 5px 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .main-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .header {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 0 50px rgba(255, 0, 100, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .title {
+            font-size: 3.5em;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff0080, #ff8c00, #40e0d0, #ff0080);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease infinite;
+            text-shadow: 0 0 30px rgba(255, 0, 128, 0.5);
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.8em;
+            color: #00ffff;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+            margin-bottom: 20px;
+        }
+        
+        .copyright {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #888;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 11px;
+            z-index: 9998;
+            backdrop-filter: blur(5px);
+        }
+        
+        .risk-warning {
+            background: linear-gradient(135deg, #ff1744, #d50000);
+            border: 3px solid #ff5722;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 15px;
+            box-shadow: 0 0 40px rgba(255, 23, 68, 0.6);
+            animation: criticalPulse 2s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .risk-warning::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes criticalPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 40px rgba(255, 23, 68, 0.6); }
+            50% { transform: scale(1.02); box-shadow: 0 0 60px rgba(255, 23, 68, 0.9); }
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .risk-title {
+            font-size: 2em;
             font-weight: bold;
-            font-size: 14px;
+            margin-bottom: 15px;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
-        .loading {
-            color: #666;
-            font-style: italic;
-            font-size: 12px;
+        
+        .risk-list {
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
         }
+        
+        .risk-item {
+            margin: 12px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .risk-item:last-child {
+            border-bottom: none;
+        }
+        
+        .consent-section {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 15px;
+            border: 2px solid #ffa500;
+            box-shadow: 0 0 30px rgba(255, 165, 0, 0.4);
+        }
+        
+        .consent-button {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        }
+        
+        .consent-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.6);
+        }
+        
+        .consent-button.danger {
+            background: linear-gradient(45deg, #dc2626, #b91c1c);
+            box-shadow: 0 5px 15px rgba(220, 38, 38, 0.4);
+        }
+        
+        .consent-button.danger:hover {
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.6);
+        }
+        
+        .stats {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 25px;
+            margin: 25px auto;
+            border-radius: 20px;
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.3);
+            border: 2px solid #00ffff;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            animation: scan 4s infinite;
+        }
+        
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
         .counter {
             position: fixed;
-            top: 10px;
-            right: 10px;
-            background: #333;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(45deg, #ff0080, #ff8c00);
             color: white;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 12px;
+            padding: 15px 20px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: bold;
             z-index: 9999;
+            box-shadow: 0 0 30px rgba(255, 0, 128, 0.7);
+            animation: counterPulse 1.5s infinite;
+            backdrop-filter: blur(10px);
         }
+        
+        @keyframes counterPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
         .progress-bar {
             width: 100%;
-            height: 20px;
-            background-color: #ddd;
-            border-radius: 10px;
+            height: 30px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
             overflow: hidden;
-            margin: 10px 0;
+            margin: 20px 0;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.7);
+            border: 2px solid #333;
         }
+        
         .progress-fill {
             height: 100%;
-            background-color: #4CAF50;
+            background: linear-gradient(90deg, #ff0080, #ff8c00, #40e0d0, #ff0080);
+            background-size: 400% 100%;
             width: 0%;
-            transition: width 0.3s ease;
+            transition: width 0.2s ease;
+            animation: progressGlow 2s ease-in-out infinite;
+            position: relative;
+        }
+        
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: progressShine 1.5s infinite;
+        }
+        
+        @keyframes progressGlow {
+            0%, 100% { 
+                background-position: 0% 50%;
+                box-shadow: 0 0 20px rgba(255, 0, 128, 0.5);
+            }
+            50% { 
+                background-position: 100% 50%;
+                box-shadow: 0 0 40px rgba(255, 140, 0, 0.8);
+            }
+        }
+        
+        @keyframes progressShine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .status {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 15px 0;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+            color: #00ffff;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .warning {
+            background: linear-gradient(135deg, rgba(255, 68, 68, 0.3), rgba(255, 0, 102, 0.3));
+            border: 3px solid #ff4444;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 15px;
+            animation: warningBlink 1.5s infinite;
+            box-shadow: 0 0 40px rgba(255, 68, 68, 0.4);
+            backdrop-filter: blur(5px);
+        }
+        
+        @keyframes warningBlink {
+            0%, 100% { opacity: 1; border-color: #ff4444; }
+            50% { opacity: 0.8; border-color: #ff0066; }
+        }
+        
+        .memory-stats {
+            background: linear-gradient(135deg, rgba(0, 255, 0, 0.2), rgba(0, 255, 255, 0.2));
+            border: 2px solid #00ff88;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            font-size: 14px;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+            backdrop-filter: blur(5px);
+        }
+        
+        .section-indicator {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 10px;
+            font-size: 16px;
+            border-left: 5px solid #ff4444;
+            box-shadow: 0 0 20px rgba(255, 68, 68, 0.2);
+            backdrop-filter: blur(5px);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .float-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ff0080;
+            border-radius: 50%;
+            animation: float 10s infinite linear;
+            opacity: 0.7;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="counter" id="liveCounter">Loading: 0 / 10000+</div>
+    <div class="float-particles" id="particles"></div>
+    <div class="copyright">© 2024 Royverse. All rights reserved.</div>
+    <div class="counter" id="liveCounter">🔥 INITIALIZING BOMBARDMENT...</div>
     
-    <h1>🚫 ULTIMATE AD-BLOCKER STRESS TEST</h1>
-    
-    <div class="stats">
-        <h2>MASSIVE TRACKER BOMBARDMENT</h2>
-        <p><strong>Target:</strong> 10,000+ tracking elements</p>
-        <p><strong>Generated:</strong> <span id="totalCount">0</span></p>
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressBar"></div>
+    <div class="main-container">
+        <div class="header">
+            <h1 class="title">🚫 ULTRA AD-BLOCKER STRESS TEST 🚫</h1>
+            <h2 class="subtitle">⚡ MEMORY OPTIMIZED EDITION ⚡</h2>
         </div>
-        <p><em>Generating maximum tracker load...</em></p>
-    </div>
+        
+        <div class="risk-warning" id="riskWarning">
+            <div class="risk-title">⚠️ CRITICAL SYSTEM WARNING ⚠️</div>
+            <div class="risk-list">
+                <div class="risk-item">🔥 <strong>HIGH CPU USAGE:</strong> This test will consume significant processing power and may slow down your system</div>
+                <div class="risk-item">🧠 <strong>MEMORY INTENSIVE:</strong> RAM usage will spike dramatically during execution (2-8GB possible)</div>
+                <div class="risk-item">🌐 <strong>BROWSER STRESS:</strong> May cause browser freezing, crashes, or unresponsiveness</div>
+                <div class="risk-item">🔌 <strong>NETWORK LOAD:</strong> Generates thousands of HTTP requests that may impact network performance</div>
+                <div class="risk-item">⚡ <strong>SYSTEM IMPACT:</strong> Other applications may become sluggish or unresponsive</div>
+                <div class="risk-item">💾 <strong>DATA USAGE:</strong> Consumes significant bandwidth (potentially 100+ MB)</div>
+                <div class="risk-item">🔋 <strong>BATTERY DRAIN:</strong> Mobile devices will experience rapid battery depletion</div>
+                <div class="risk-item">🚨 <strong>CRASH RISK:</strong> May cause browser or system crashes on low-end devices</div>
+            </div>
+            <div class="consent-section">
+                <p><strong>⚠️ PROCEED ONLY IF:</strong></p>
+                <p>✓ You have a powerful computer with 8GB+ RAM<br>
+                ✓ You've saved all important work<br>
+                ✓ You understand the risks and accept full responsibility<br>
+                ✓ You're using this for legitimate ad-blocker testing purposes only</p>
+                
+                <div style="margin-top: 20px;">
+                    <button class="consent-button" id="startTestButton">I UNDERSTAND THE RISKS - START TEST</button>
+                    <button class="consent-button danger" id="closeTestButton">CANCEL - TOO RISKY</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="warning hidden" id="activeWarning">
+            <strong>⚠️ EXTREME MODE ACTIVATED ⚠️</strong><br>
+            This will generate 50,000+ tracking elements with aggressive cleanup!
+        </div>
 
-    <div id="content-container"></div>
+        <div class="stats hidden" id="statsSection">
+            <h2>🔥 MASSIVE TRACKER BOMBARDMENT</h2>
+            <p><strong>Target:</strong> 50,000+ tracking elements</p>
+            <p><strong>Generated:</strong> <span id="totalCount">0</span></p>
+            <p><strong>Active in Memory:</strong> <span id="activeCount">0</span></p>
+            <p><strong>Cleaned Up:</strong> <span id="cleanedCount">0</span></p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            <div class="status" id="statusText">Preparing ultra-aggressive bombardment...</div>
+            <div class="memory-stats" id="memoryStats">Memory: Calculating...</div>
+        </div>
+
+        <div id="content-container"></div>
+        <div id="current-section" class="section-indicator hidden">Ready to begin...</div>
+    </div>
 
     <script>
         let totalElements = 0;
-        let targetElements = 10000;
+        let activeElements = 0;
+        let cleanedElements = 0;
+        let targetElements = 50000;
+        let currentBatch = 0;
+        let isRunning = false;
+        let testStarted = false;
+        let maxActiveElements = 0;
+        
         const container = document.getElementById('content-container');
+        const activeElementsMap = new Map();
+        
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 5) + 's';
+                const colors = ['#ff0080', '#00ffff', '#ff8c00', '#40e0d0'];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Initialize particles
+        createParticles();
+        
+        function closeTest() {
+            const confirmation = confirm("Are you sure you want to close this test?");
+            if (confirmation) {
+                if (window.opener) {
+                    window.close();
+                } else {
+                    window.location.href = 'about:blank';
+                }
+            }
+        }
+        
+        function startTest() {
+            if (testStarted) return;
+            testStarted = true;
+            
+            // Hide risk warning and show test interface
+            document.getElementById('riskWarning').classList.add('hidden');
+            document.getElementById('activeWarning').classList.remove('hidden');
+            document.getElementById('statsSection').classList.remove('hidden');
+            document.getElementById('current-section').classList.remove('hidden');
+            
+            // Start countdown
+            let countdown = 5;
+            const countdownInterval = setInterval(() => {
+                updateStatus(`🚀 ULTRA BOMBARDMENT STARTING IN ${countdown}...`);
+                document.getElementById('liveCounter').textContent = `⏰ Starting in ${countdown}...`;
+                countdown--;
+                if (countdown < 0) {
+                    clearInterval(countdownInterval);
+                    isRunning = true;
+                    ultraBombardment().catch(console.error);
+                }
+            }, 1000);
+        }
+        
+        // Attach event listeners to buttons
+        document.getElementById('startTestButton').addEventListener('click', startTest);
+        document.getElementById('closeTestButton').addEventListener('click', closeTest);
+        
+        // Memory monitoring
+        function updateMemoryStats() {
+            if (performance.memory) {
+                const used = Math.round(performance.memory.usedJSHeapSize / 1048576);
+                const total = Math.round(performance.memory.totalJSHeapSize / 1048576);
+                document.getElementById('memoryStats').textContent = 
+                    `Memory: ${used}MB / ${total}MB | Active Elements: ${activeElements}`;
+            } else {
+                document.getElementById('memoryStats').textContent = 
+                    `Memory: Not available | Active Elements: ${activeElements}`;
+            }
+        }
         
         function updateCounter() {
-            document.getElementById('totalCount').textContent = totalElements;
-            document.getElementById('liveCounter').textContent = `Generated: ${totalElements} / ${targetElements}+`;
+            document.getElementById('totalCount').textContent = totalElements.toLocaleString();
+            document.getElementById('activeCount').textContent = activeElements.toLocaleString();
+            document.getElementById('cleanedCount').textContent = cleanedElements.toLocaleString();
+            document.getElementById('liveCounter').textContent = 
+                `🔥 ${totalElements.toLocaleString()} | Active: ${activeElements.toLocaleString()}`;
+            
             const progress = (totalElements / targetElements) * 100;
             document.getElementById('progressBar').style.width = Math.min(progress, 100) + '%';
+            
+            // Track max active elements
+            if (activeElements > maxActiveElements) {
+                maxActiveElements = activeElements;
+            }
+            
+            updateMemoryStats();
         }
         
-        function addElement() {
-            totalElements++;
-            if (totalElements % 50 === 0) updateCounter();
+        function updateStatus(text) {
+            document.getElementById('statusText').textContent = text;
+            document.getElementById('current-section').textContent = text;
         }
 
-        function createSection(title) {
-            const section = document.createElement('div');
-            section.className = 'section-header';
-            section.textContent = title;
-            container.appendChild(section);
-            return section;
-        }
-
-        function addScript(src, content) {
-            const script = document.createElement('script');
-            if (src) {
-                script.src = src;
-                script.async = true;
+        // Advanced cleanup system
+        function cleanupElement(element, id) {
+            try {
+                if (element && element.parentNode) {
+                    element.parentNode.removeChild(element);
+                }
+                if (activeElementsMap.has(id)) {
+                    activeElementsMap.delete(id);
+                    activeElements--;
+                    cleanedElements++;
+                }
+            } catch (e) {
+                // Element might already be removed
+                if (activeElementsMap.has(id)) {
+                    activeElementsMap.delete(id);
+                    activeElements--;
+                    cleanedElements++;
+                }
             }
-            if (content) {
-                script.textContent = content;
+        }
+
+        function scheduleCleanup(element, delay = 1000) {
+            const id = 'element_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            activeElementsMap.set(id, element);
+            activeElements++;
+            
+            setTimeout(() => {
+                cleanupElement(element, id);
+            }, delay);
+            
+            return id;
+        }
+
+        // Ultra-aggressive element generation
+        function addScript(src, content, cleanup = true) {
+            try {
+                const script = document.createElement('script');
+                if (src) {
+                    script.src = src;
+                    script.async = true;
+                    script.defer = true;
+                }
+                if (content) {
+                    script.textContent = content;
+                }
+                document.head.appendChild(script);
+                totalElements++;
+                
+                if (cleanup) {
+                    scheduleCleanup(script, 500 + Math.random() * 1000);
+                }
+            } catch (e) {
+                console.error('Script creation error:', e);
             }
-            document.head.appendChild(script);
-            addElement();
         }
 
-        function addPixel(src, className = 'tracker') {
-            const img = document.createElement('img');
-            img.src = src;
-            img.className = className;
-            img.width = 1;
-            img.height = 1;
-            img.style.display = 'none';
-            img.style.position = 'absolute';
-            img.style.top = '-1000px';
-            document.body.appendChild(img);
-            addElement();
+        function addPixel(src, cleanup = true) {
+            try {
+                const img = document.createElement('img');
+                img.src = src;
+                img.width = 1;
+                img.height = 1;
+                img.style.cssText = 'display:none!important;position:absolute!important;top:-9999px!important;left:-9999px!important;';
+                img.onerror = () => {}; // Suppress error messages
+                document.body.appendChild(img);
+                totalElements++;
+                
+                if (cleanup) {
+                    scheduleCleanup(img, 300 + Math.random() * 700);
+                }
+            } catch (e) {
+                console.error('Pixel creation error:', e);
+            }
         }
 
-        function addIframe(src, width = 300, height = 250) {
-            const iframe = document.createElement('iframe');
-            iframe.src = src;
-            iframe.width = width;
-            iframe.height = height;
-            iframe.frameBorder = 0;
-            iframe.scrolling = 'no';
-            iframe.style.border = '1px solid #ddd';
-            iframe.style.margin = '1px';
-            container.appendChild(iframe);
-            addElement();
+        function addIframe(src, cleanup = true) {
+            try {
+                const iframe = document.createElement('iframe');
+                iframe.src = src;
+                iframe.width = 1;
+                iframe.height = 1;
+                iframe.style.cssText = 'display:none!important;position:absolute!important;top:-9999px!important;';
+                iframe.frameBorder = 0;
+                iframe.sandbox = 'allow-scripts allow-same-origin';
+                document.body.appendChild(iframe);
+                totalElements++;
+                
+                if (cleanup) {
+                    scheduleCleanup(iframe, 800 + Math.random() * 1200);
+                }
+            } catch (e) {
+                console.error('Iframe creation error:', e);
+            }
         }
 
-        // Batch processing to prevent browser freezing
-        function processBatch(batchFunction, batchSize = 10) {
+        // Ultra-fast batch processing
+        function processBatch(batchFunction, batchSize = 50, delay = 5) {
             return new Promise(resolve => {
                 let processed = 0;
                 function processNext() {
+                    if (!isRunning) {
+                        resolve();
+                        return;
+                    }
+                    
                     const end = Math.min(processed + batchSize, batchFunction.length);
                     for (let i = processed; i < end; i++) {
-                        batchFunction[i]();
+                        try {
+                            batchFunction[i]();
+                        } catch (e) {
+                            console.error('Batch processing error:', e);
+                        }
                     }
                     processed = end;
                     
+                    if (processed % 100 === 0) {
+                        updateCounter();
+                    }
+                    
                     if (processed < batchFunction.length) {
-                        setTimeout(processNext, 10);
+                        setTimeout(processNext, delay);
                     } else {
                         resolve();
                     }
@@ -180,197 +660,81 @@
             });
         }
 
-        // Start generating trackers
-        async function generateTrackers() {
-            console.log('🔥 Starting Ultimate Tracker Generation...');
-
-            // BATCH 1: Google Analytics (500)
-            createSection('Google Analytics Trackers (500)');
-            const gaBatch = [];
-            for (let i = 1; i <= 500; i++) {
-                gaBatch.push(() => {
-                    addScript(`https://www.googletagmanager.com/gtag/js?id=GA-${Math.random().toString(36).substr(2, 9)}-${i}`);
-                    addScript(null, `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','GA-${Math.random().toString(36).substr(2, 9)}-${i}');`);
-                });
-            }
-            await processBatch(gaBatch);
-
-            // BATCH 2: Facebook Pixels (500)
-            createSection('Facebook Pixel Trackers (500)');
-            const fbBatch = [];
-            for (let i = 1; i <= 500; i++) {
-                fbBatch.push(() => {
-                    const fbId = Math.floor(Math.random() * 999999999999999);
-                    addScript('https://connect.facebook.net/en_US/fbevents.js');
-                    addScript(null, `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${fbId}');fbq('track','PageView');`);
-                    addPixel(`https://www.facebook.com/tr?id=${fbId}&ev=PageView&noscript=1`);
-                });
-            }
-            await processBatch(fbBatch);
-
-            // BATCH 3: Google Ads/DoubleClick (800)
-            createSection('Google Ads & DoubleClick (800)');
-            const dcBatch = [];
-            for (let i = 1; i <= 800; i++) {
-                dcBatch.push(() => {
-                    addScript(`https://googleads.g.doubleclick.net/pagead/viewthroughconversion/${Math.floor(Math.random() * 999999999)}/?random=${Math.random()}&cv=${i}&fst=${Date.now()}&num=1&resp=GooglemKTybQhCsO`);
-                    addPixel(`https://googleads.g.doubleclick.net/pagead/viewthroughconversion/${Math.floor(Math.random() * 999999999)}/?value=0&label=conversion${i}&guid=ON&script=0`);
-                });
-            }
-            await processBatch(dcBatch);
-
-            // BATCH 4: Amazon (400)
-            createSection('Amazon Tracking (400)');
-            const azBatch = [];
-            for (let i = 1; i <= 400; i++) {
-                azBatch.push(() => {
-                    addScript(`https://s.amazon-adsystem.com/iu3?cm3pid=${Math.floor(Math.random() * 999999)}&d=forester-did&ex-fch=416613&ex-src=${encodeURIComponent(location.href)}&ex-hargs=v%3D1.0%3Bc%3D${i}`);
-                    addPixel(`https://s.amazon-adsystem.com/iui3?d=forester-did&ex-fch=416613&ex-src=${encodeURIComponent(location.href)}&ex-hargs=v%3D1.0%3Bc%3D${i}`);
-                });
-            }
-            await processBatch(azBatch);
-
-            // BATCH 5: Microsoft/Bing (300)
-            createSection('Microsoft/Bing Tracking (300)');
-            const msBatch = [];
-            for (let i = 1; i <= 300; i++) {
-                msBatch.push(() => {
-                    addScript('https://bat.bing.com/bat.js');
-                    addScript(null, `(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"${Math.floor(Math.random() * 999999999)}"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");`);
-                });
-            }
-            await processBatch(msBatch);
-
-            // BATCH 6: Social Media Pixels (1000)
-            createSection('Social Media Tracking (1000)');
-            const socialBatch = [];
-            const socialPlatforms = [
-                {name: 'Twitter', script: 'https://static.ads-twitter.com/uwt.js', code: `!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');twq('init','PARTNER_ID');twq('track','PageView');`},
-                {name: 'LinkedIn', script: 'https://snap.licdn.com/li.lms-analytics/insight.min.js', code: `_linkedin_partner_id="PARTNER_ID";window._linkedin_data_partner_ids=window._linkedin_data_partner_ids||[];window._linkedin_data_partner_ids.push(_linkedin_partner_id);`},
-                {name: 'Pinterest', script: 'https://s.pinimg.com/ct/core.js', code: `!function(e){if(!window.pintrk){window.pintrk=function(){window.pintrk.queue.push(Array.prototype.slice.call(arguments))};var n=window.pintrk;n.queue=[],n.version="3.0";var t=document.createElement("script");t.async=!0,t.src=e;var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r)}}("https://s.pinimg.com/ct/core.js");pintrk('load','PARTNER_ID');pintrk('page');`},
-                {name: 'TikTok', script: 'https://analytics.tiktok.com/i18n/pixel/events.js', code: `!function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"];ttq.load=function(e,n){ttq._i=ttq._i||{},ttq._i[e]=[];var i="https://analytics.tiktok.com/i18n/pixel/events.js";var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=i+"?sdkid="+e+"&lib="+t;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};ttq.load('PARTNER_ID');ttq.page();}(window,document,'ttq');`},
-                {name: 'Snapchat', script: 'https://sc-static.net/scevent.min.js', code: `(function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function(){a.handleRequest?a.handleRequest.apply(a,arguments):a.queue.push(arguments)};a.queue=[];var s='script';r=t.createElement(s);r.async=!0;r.src=n;var u=t.getElementsByTagName(s)[0];u.parentNode.insertBefore(r,u);})(window,document,'https://sc-static.net/scevent.min.js');snaptr('init','PARTNER_ID');snaptr('track','PAGE_VIEW');`}
-            ];
-
-            for (let i = 1; i <= 1000; i++) {
-                socialBatch.push(() => {
-                    const platform = socialPlatforms[i % socialPlatforms.length];
-                    const partnerId = Math.random().toString(36).substr(2, 12);
-                    addScript(platform.script);
-                    addScript(null, platform.code.replace('PARTNER_ID', partnerId));
-                });
-            }
-            await processBatch(socialBatch);
-
-            // BATCH 7: Ad Networks (1000)
-            createSection('Ad Networks (1000)');
-            const adNetworkBatch = [];
-            const adNetworks = [
-                {name: 'Criteo', domain: 'criteo.net'},
-                {name: 'Outbrain', domain: 'outbrain.com'},
-                {name: 'Taboola', domain: 'taboola.com'},
-                {name: 'Media.net', domain: 'media.net'},
-                {name: 'Rubicon', domain: 'rubiconproject.com'},
-                {name: 'OpenX', domain: 'openx.net'},
-                {name: 'PubMatic', domain: 'pubmatic.com'},
-                {name: 'Index Exchange', domain: 'indexexchange.com'},
-                {name: 'AppNexus', domain: 'appnexus.com'},
-                {name: 'The Trade Desk', domain: 'adsrvr.org'}
-            ];
-
-            for (let i = 1; i <= 1000; i++) {
-                adNetworkBatch.push(() => {
-                    const network = adNetworks[i % adNetworks.length];
-                    addScript(`https://static.${network.domain}/js/ld/ld.js`);
-                    addPixel(`https://pixel.${network.domain}/track.gif?id=${i}&uid=${Math.random().toString(36).substr(2, 9)}&ref=${encodeURIComponent(location.href)}&ts=${Date.now()}`);
-                });
-            }
-            await processBatch(adNetworkBatch);
-
-            // BATCH 8: Analytics & Measurement (1000)
-            createSection('Analytics & Measurement (1000)');
-            const analyticsBatch = [];
-            const analyticsProviders = [
-                'adobe.com', 'salesforce.com', 'oracle.com', 'nielsen.com', 'comscore.com',
-                'chartbeat.com', 'quantserve.com', 'scorecardresearch.com', 'hotjar.com', 'crazyegg.com'
-            ];
-
-            for (let i = 1; i <= 1000; i++) {
-                analyticsBatch.push(() => {
-                    const provider = analyticsProviders[i % analyticsProviders.length];
-                    addScript(`https://assets.${provider}/analytics/tracker-${i}.js?v=${Date.now()}`);
-                    addPixel(`https://pixel.${provider}/collect?id=${i}&uid=${Math.random().toString(36).substr(2, 9)}&sid=${Date.now()}&ref=${encodeURIComponent(location.href)}`);
-                });
-            }
-            await processBatch(analyticsBatch);
-
-            // BATCH 9: Mega Pixel Bombardment (3000)
-            createSection('MEGA PIXEL BOMBARDMENT (3000)');
-            const megaPixelBatch = [];
-            const pixelDomains = [
+        // MEGA BOMBARDMENT FUNCTION
+        async function ultraBombardment() {
+            console.log('🔥🔥🔥 STARTING ULTRA BOMBARDMENT 🔥🔥🔥');
+            
+            const domains = [
                 'google-analytics.com', 'googletagmanager.com', 'doubleclick.net', 'googlesyndication.com',
                 'facebook.com', 'connect.facebook.net', 'instagram.com', 'twitter.com', 'ads-twitter.com',
                 'linkedin.com', 'snap.licdn.com', 'pinterest.com', 'pinimg.com', 'tiktok.com',
                 'analytics.tiktok.com', 'snapchat.com', 'sc-static.net', 'amazon.com', 's.amazon-adsystem.com',
                 'microsoft.com', 'bing.com', 'bat.bing.com', 'criteo.com', 'criteo.net', 'outbrain.com',
-                'taboola.com', 'media.net', 'rubiconproject.com', 'openx.net', 'pubmatic.com'
+                'taboola.com', 'media.net', 'rubiconproject.com', 'openx.net', 'pubmatic.com',
+                'indexexchange.com', 'appnexus.com', 'adsrvr.org', 'adobe.com', 'salesforce.com',
+                'oracle.com', 'nielsen.com', 'comscore.com', 'chartbeat.com', 'quantserve.com',
+                'scorecardresearch.com', 'hotjar.com', 'crazyegg.com', 'optimizely.com', 'segment.com'
             ];
 
-            for (let i = 1; i <= 3000; i++) {
-                megaPixelBatch.push(() => {
-                    const domain = pixelDomains[i % pixelDomains.length];
-                    const params = `id=${Math.random().toString(36).substr(2, 9)}&uid=${Math.random().toString(36).substr(2, 12)}&sid=${Date.now()}&ref=${encodeURIComponent(location.href)}&ts=${Date.now()}&r=${Math.random()}&v=${i}&scr=${screen.width}x${screen.height}&lang=${navigator.language}`;
-                    
+            // WAVE 1: Pixel Storm (10,000 pixels)
+            updateStatus('🌪️ PIXEL STORM - 10,000 tracking pixels');
+            const pixelBatch = [];
+            for (let i = 1; i <= 10000; i++) {
+                pixelBatch.push(() => {
+                    const domain = domains[i % domains.length];
+                    const params = `id=${Math.random().toString(36).substr(2, 9)}&uid=${Math.random().toString(36).substr(2, 12)}&t=${Date.now()}&r=${Math.random()}&v=${i}`;
                     addPixel(`https://${domain}/pixel.gif?${params}`);
                     addPixel(`https://pixel.${domain}/track.png?${params}`);
-                    addPixel(`https://analytics.${domain}/beacon.gif?${params}`);
                 });
             }
-            await processBatch(megaPixelBatch, 20);
+            await processBatch(pixelBatch, 100, 2);
 
-            // BATCH 10: Iframe Ad Bombardment (2000)
-            createSection('IFRAME AD BOMBARDMENT (2000)');
+            // WAVE 2: Script Tsunami (15,000 scripts)
+            updateStatus('🌊 SCRIPT TSUNAMI - 15,000 tracking scripts');
+            const scriptBatch = [];
+            for (let i = 1; i <= 15000; i++) {
+                scriptBatch.push(() => {
+                    const domain = domains[i % domains.length];
+                    addScript(`https://${domain}/analytics/tracker-${i}.js?v=${Date.now()}&r=${Math.random()}`);
+                    addScript(null, `(function(){var id='${Math.random().toString(36).substr(2, 9)}';window._trackers=window._trackers||[];window._trackers.push(id);})();`);
+                });
+            }
+            await processBatch(scriptBatch, 80, 3);
+
+            // WAVE 3: Iframe Hurricane (10,000 iframes)
+            updateStatus('🌀 IFRAME HURRICANE - 10,000 ad frames');
             const iframeBatch = [];
-            const iframeDomains = [
-                'doubleclick.net', 'googlesyndication.com', 'googleadservices.com', 'facebook.com',
-                'amazon-adsystem.com', 'bing.com', 'criteo.com', 'outbrain.com', 'taboola.com',
-                'media.net', 'rubiconproject.com', 'openx.net', 'pubmatic.com', 'indexexchange.com'
-            ];
-
-            for (let i = 1; i <= 2000; i++) {
+            for (let i = 1; i <= 10000; i++) {
                 iframeBatch.push(() => {
-                    const domain = iframeDomains[i % iframeDomains.length];
-                    const params = `id=${i}&ref=${encodeURIComponent(location.href)}&r=${Math.random()}&placement=banner${i}&w=300&h=250`;
-                    addIframe(`https://ads.${domain}/serve?${params}`, 300, 250);
+                    const domain = domains[i % domains.length];
+                    addIframe(`https://ads.${domain}/serve?id=${i}&ref=${encodeURIComponent(location.href)}&r=${Math.random()}`);
                 });
             }
-            await processBatch(iframeBatch, 5);
+            await processBatch(iframeBatch, 60, 4);
 
-            // Final update
-            updateCounter();
-            document.getElementById('liveCounter').textContent = `✅ COMPLETE: ${totalElements} trackers generated!`;
-            document.getElementById('liveCounter').style.backgroundColor = '#28a745';
-            
-            // Add completion message
-            const completionDiv = document.createElement('div');
-            completionDiv.className = 'stats';
-            completionDiv.style.marginTop = '40px';
-            completionDiv.innerHTML = `
-                <h2>🔥 BOMBARDMENT COMPLETE! 🔥</h2>
-                <p><strong>Total Tracking Elements Generated:</strong> ${totalElements}</p>
-                <p><strong>Coverage:</strong> Google, Facebook, Amazon, Microsoft, Twitter, LinkedIn, Pinterest, TikTok, Snapchat, Criteo, Outbrain, Taboola, Adobe, and 50+ other platforms!</p>
-                <p><em>🎯 Check your ad-blocker's statistics now to see the damage!</em></p>
-                <p><small>⚠️ This page is for ad-blocker testing purposes only. All elements are fake and non-functional.</small></p>
-            `;
-            container.appendChild(completionDiv);
-            
-            console.log(`🔥 ULTIMATE TRACKER BOMBARDMENT COMPLETE! 🔥`);
-            console.log(`Total elements generated: ${totalElements}`);
-            console.log(`Your ad-blocker should be showing THOUSANDS of blocked items now!`);
+            // WAVE 4: Social Media Blitz (8,000 social trackers)
+            updateStatus('📱 SOCIAL MEDIA BLITZ - 8,000 social trackers');
+            const socialBatch = [];
+            const socialConfigs = [
+                {name: 'Facebook', pixel: 'facebook.com/tr', script: 'connect.facebook.net/en_US/fbevents.js'},
+                {name: 'Twitter', pixel: 'analytics.twitter.com/i/adsct', script: 'static.ads-twitter.com/uwt.js'},
+                {name: 'LinkedIn', pixel: 'px.ads.linkedin.com/collect', script: 'snap.licdn.com/li.lms-analytics/insight.min.js'},
+                {name: 'Pinterest', pixel: 'ct.pinterest.com/v3/', script: 's.pinimg.com/ct/core.js'},
+                {name: 'TikTok', pixel: 'analytics.tiktok.com/api/v1/pixel/track/', script: 'analytics.tiktok.com/i18n/pixel/events.js'}
+            ];
+            for (let i = 1; i <= 8000; i++) {
+                socialBatch.push(() => {
+                    const config = socialConfigs[i % socialConfigs.length];
+                    addPixel(`https://${config.pixel}?id=${Math.random().toString(36).substr(2, 9)}`);
+                    addScript(`https://${config.script}?v=${Math.random()}`);
+                });
+            }
+            await processBatch(socialBatch, 50, 5);
+
+            // Finalize
+            updateStatus('✅ ULTRA BOMBARDMENT COMPLETE');
+            document.getElementById('liveCounter').textContent = `🎉 Done! Max Active: ${maxActiveElements.toLocaleString()}`;
         }
-
-        // Start the generation process
-        generateTrackers().catch(console.error);
     </script>
 </body>
 </html>
